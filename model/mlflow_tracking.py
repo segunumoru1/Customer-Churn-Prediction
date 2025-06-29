@@ -7,6 +7,7 @@ import mlflow.sklearn
 import mlflow.xgboost
 import plotly.express as px
 import plotly.io as pio
+from pathlib import Path
 
 from xgboost import XGBClassifier
 from sklearn.svm import SVC
@@ -22,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ARTIFACTS_DIR = os.path.join(BASE_DIR, "artifacts")
 MODELS_DIR = os.path.join(BASE_DIR, "models")
 MLRUNS_DIR = os.path.join(BASE_DIR, "mlruns")
-DATA_PATH = r"C:\Users\IfeomaAugustaAdigwe\Desktop\Customer_Churn_Prediction_and_Model\data\processed_churn_data.csv"
+DATA_PATH = Path(__file__).parent.parent / "data" / "processed_churn_data.csv"
+
 
 # Create directories
 os.makedirs(ARTIFACTS_DIR, exist_ok=True)

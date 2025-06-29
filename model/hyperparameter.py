@@ -13,8 +13,8 @@ from imblearn.over_sampling import SMOTE
 from joblib import dump
 
 # Configuration
-DATA_PATH = Path(r"C:\Users\IfeomaAugustaAdigwe\Desktop\Customer_Churn_Prediction_and_Model\data\processed_churn_data.csv")
-ARTIFACTS_DIR = Path(r"C:\Users\IfeomaAugustaAdigwe\Desktop\Customer_Churn_Prediction_and_Model\artifacts")
+DATA_PATH = Path(__file__).parent.parent / "data" / "processed_churn_data.csv"
+ARTIFACTS_DIR = Path(__file__).parent.parent / "artifacts"
 os.makedirs(ARTIFACTS_DIR, exist_ok=True)
 RANDOM_STATE = 42
 
