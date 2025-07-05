@@ -7,9 +7,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.abspath(os.path.join(BASE_DIR, "..", "artifacts", "best_xgb_model.joblib"))
 
-# Debug: Show resolved path
-# st.write(f"Resolved model path: {model_path}")
-
 if not os.path.exists(model_path):
     st.error("🚨 Model path verification failed.")
     st.error(f"🧭 Checked path: {model_path}")
@@ -20,19 +17,16 @@ if not os.path.exists(model_path):
 
 model = joblib.load(model_path)
 
-# --- Define expected model features ---
+# --- Define expected model features (based on your model training) ---
 expected_columns = [
     "tenure",
-    "monthly_charges",
+    "monthly_charges", 
     "support_calls",
-    "has_contract",
     "has_contract_Yes",
     "payment_method_Bank Transfer",
-    "payment_method_Cash",
     "payment_method_Credit Card",
     "payment_method_Electronic Check",
-    "payment_method_Mailed Check",
-    "payment_method_PayPal"
+    "payment_method_Mailed Check"
 ]
 
 # --- Streamlit UI ---
@@ -57,18 +51,16 @@ if submitted:
         "tenure": tenure,
         "monthly_charges": monthly_charges,
         "support_calls": support_calls,
-        "has_contract": int(has_contract_input == "Yes"),
         "has_contract_Yes": int(has_contract_input == "Yes"),
         "payment_method_Bank Transfer": int(payment_method == "Bank Transfer"),
-        "payment_method_Cash": 0,
         "payment_method_Credit Card": int(payment_method == "Credit Card"),
         "payment_method_Electronic Check": int(payment_method == "Electronic Check"),
-        "payment_method_Mailed Check": int(payment_method == "Mailed Check"),
-        "payment_method_PayPal": 0
+        "payment_method_Mailed Check": int(payment_method == "Mailed Check")
     }
 
     df = pd.DataFrame([input_data])
 
+    # Ensure all expected columns exist
     for col in expected_columns:
         if col not in df.columns:
             df[col] = 0
