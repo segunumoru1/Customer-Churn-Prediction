@@ -1,9 +1,12 @@
 import pandas as pd
 from pathlib import Path
+import os
 
 # 1. Load the Dataset
 def load_data():
-    data_path = Path("../data/churn_data.csv")
+    # Fix path to work from current script location
+    script_dir = Path(__file__).parent
+    data_path = script_dir.parent / "data" / "week4_churn_data.csv"
     df = pd.read_csv(data_path)
     print("✅ Dataset loaded successfully!")
     return df
@@ -42,7 +45,11 @@ def handle_missing_values(df):
 
 # 4. Save Processed Data
 def save_processed_data(df):
-    output_path = Path("../data/processed_churn_data.csv")
+    # Fix path to work from current script location
+    script_dir = Path(__file__).parent
+    output_path = script_dir.parent / "data" / "processed_churn_data.csv"
+    # Create data directory if it doesn't exist
+    output_path.parent.mkdir(exist_ok=True)
     df.to_csv(output_path, index=False)
     print(f"\n💾 Processed data saved to: {output_path}")
 
